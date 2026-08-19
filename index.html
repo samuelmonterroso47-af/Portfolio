@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esvin Samuel CM — Growth &amp; AI Partner</title>
+<meta name="description" content="Growth & AI Partner: estrategia comercial, datos e IA aplicada. Power BI, DAX, automatizacion y sistemas propios, desde Guatemala.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:#060709}
+  body{background:#060709;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Manrope",sans-serif;line-height:1.47}
+  a{color:#2997ff;text-decoration:none}
+  a:hover{color:#5aaeff}
+  ::selection{background:#2997ff;color:#fff}
+  [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  [data-reveal].in{opacity:1;transform:none}
+  input::placeholder,textarea::placeholder{color:#6e6e73}
+  input:focus,textarea:focus{outline:none;border-color:#2997ff}
+  @media (max-width: 899px) { #site-nav { display: none !important; } }
+  #interest-modal.open{display:flex !important}
+</style>
+</head>
+<body>
+<div id="app-root" style="position:relative;width:100%;background:#060709;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Manrope',sans-serif;overflow-x:hidden">
+
+  <div id="stage" style="position:fixed;inset:0;z-index:0;pointer-events:none"></div>
+  <div style="position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(70% 55% at 50% 40%,rgba(6,7,9,0.86) 0%,rgba(6,7,9,0.6) 55%,rgba(6,7,9,0.3) 100%),linear-gradient(180deg,rgba(6,7,9,0.5) 0%,rgba(6,7,9,0.2) 30%,rgba(6,7,9,0.75) 100%)"></div>
+
+  <div style="position:relative;z-index:2">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(6,7,9,0.6);backdrop-filter:saturate(160%) blur(20px);-webkit-backdrop-filter:saturate(160%) blur(20px);border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div style="max-width:1140px;margin:0 auto;padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="#top" style="font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#f5f5f7">Esvin Samuel CM</a>
+      <nav id="site-nav" style="display:flex;align-items:center;gap:22px;font-size:12px;font-weight:500;color:#a1a1a6">
+        <a href="#sobre" style="color:#a1a1a6" style-hover="color:#f5f5f7">Sobre</a>
+        <a href="#estrategia" style="color:#a1a1a6" style-hover="color:#f5f5f7">Estrategia</a>
+        <a href="#datos" style="color:#a1a1a6" style-hover="color:#f5f5f7">Datos</a>
+        <a href="#ia" style="color:#a1a1a6" style-hover="color:#f5f5f7">IA</a>
+        <a href="#github" style="color:#a1a1a6" style-hover="color:#f5f5f7">Código</a>
+        <a href="#emprendimientos" style="color:#a1a1a6" style-hover="color:#f5f5f7">Emprendimientos</a>
+        <a href="#cursos" style="color:#a1a1a6" style-hover="color:#f5f5f7">Cursos</a>
+        <a href="#formacion" style="color:#a1a1a6" style-hover="color:#f5f5f7">Formación</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button type="button" id="theme-toggle" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#f5f5f7;font:inherit;font-size:12px;font-weight:500;padding:7px 14px;border-radius:980px;cursor:pointer" style-hover="background:rgba(255,255,255,0.13)">
+          <span style="width:7px;height:7px;border-radius:50%;background:#f2a83b"></span><span id="theme-label">Claro</span>
+        </button>
+        <a href="#contacto" style="background:#f5f5f7;color:#060709;font-size:12px;font-weight:600;padding:8px 16px;border-radius:980px;white-space:nowrap" style-hover="background:#fff">Contacto</a>
+      </div>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,0.06)">
+      <div id="progress-bar" style="height:1px;width:0%;background:linear-gradient(90deg,#2997ff,#f2a83b)"></div>
+    </div>
+  </header>
+
+  <section id="top" style="max-width:1140px;margin:0 auto;padding:150px 24px 120px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:82vh;justify-content:center">
+    <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#a1a1a6;margin-bottom:26px;border:1px solid rgba(255,255,255,0.12);border-radius:980px;padding:7px 15px;background:rgba(255,255,255,0.03)">
+      <span style="width:6px;height:6px;border-radius:50%;background:#f2a83b;box-shadow:0 0 12px #f2a83b"></span>Guatemala
+    </div>
+    <h1 style="font-size:clamp(42px,6.6vw,92px);font-weight:700;letter-spacing:-0.04em;line-height:1.04;max-width:1000px;text-wrap:balance">Esvin Samuel CM<br><span style="color:#6e6e73;font-weight:600">Growth &amp; AI Partner</span></h1>
+    <p style="margin-top:30px;max-width:640px;font-size:19px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Growth &amp; AI Partner. Construyo la infraestructura de reporting que usan las áreas comerciales para decidir, y en paralelo levanto mis propios negocios — de la hoja de cálculo al negocio en marcha.</p>
+    <div style="margin-top:38px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <a href="#estrategia" style="background:#2997ff;color:#fff;font-size:15px;font-weight:600;padding:13px 26px;border-radius:980px" style-hover="background:#4ea8ff">Ver proyectos</a>
+      <a href="#contacto" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:#f5f5f7;font-size:15px;font-weight:500;padding:13px 26px;border-radius:980px" style-hover="background:rgba(255,255,255,0.13)">Escribirme</a>
+    </div>
+    <div style="margin-top:70px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#4a4a4f">Bajá — la estructura se reconfigura</div>
+  </section>
+
+  <div style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px">
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="30">0</span>+</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Personas entrenadas en Power BI</div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="8">0</span>+</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Sistemas y modelos construidos de cero</div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="14">0</span></div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Repositorios propios en GitHub</div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="2">0</span></div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Negocios propios en operación</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="sobre" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">01</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Sobre mí</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:start">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;max-width:540px">
+        <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty"><strong style="color:#f5f5f7;font-weight:600">Growth &amp; AI Partner</strong> — estrategia comercial, datos e IA aplicada, con base operativa 100% en piso de negocio: ventas, auditoría financiera, sistemas, gerencia comercial, créditos y mercadeo pasan por mi trabajo antes de llegar a una decisión.</p>
+        <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty">Mi trabajo empieza donde termina el reporte manual: modelos de proyección, dashboards ejecutivos, automatización y sistemas que otras áreas usan todos los días sin pensar en cómo están construidos.</p>
+        <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty">Fuera del horario corporativo, aplico lo mismo a negocios propios — de la idea a la venta, sin depender de que alguien más lo construya.</p>
+        <p style="font-size:17px;line-height:1.6;color:#f5f5f7;text-wrap:pretty">Trabajo en varias áreas a la vez porque el problema casi nunca cabe en una sola: el hilo común es que encuentro el punto donde se pierde plata o tiempo, construyo la herramienta que lo resuelve y la dejo funcionando en manos de alguien más.</p>
+      </div>
+      <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start">
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Power BI</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">DAX avanzado</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Power Query</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Excel avanzado</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">SQL</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Python / Pandas</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Jupyter</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Tableau</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">JSON / APIs</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Automatización</span>
+        <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 15px">Modelado financiero</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="estrategia" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">02</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Estrategias comerciales</h2>
+      <span style="margin-left:auto;font-size:13px;color:#6e6e73;text-align:right;line-height:1.4">El grupo · distribución<br>de llantas y repuestos (GT)</span>
+    </div>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:640px;margin-bottom:44px;text-wrap:pretty">Estrategias diseñadas y puestas a operar sobre la cartera: cómo se incentiva al vendedor y a quién hay que visitar primero.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Incentivos</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Campaña de acumulado por cierre</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">La estrategia:</b> metas escalonadas por cartera para líneas de llantas, para que el vendedor persiga el acumulado y no solo la venta del día. Activa para 8 vendedores y 95 clientes.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> cada vendedor tiene un archivo individual que cruza avance real contra meta y calcula el incentivo en tiempo real, sin esperar el cierre de mes.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Targeting</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Modelo de tiempos extras</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">La estrategia:</b> concentrar el esfuerzo comercial en los clientes que están comprando por debajo de su potencial real, en lugar de repartirlo parejo.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> cruza histórico de compra contra fórmulas de potencial de mercado y ordena a quién visitar primero, con doble cálculo de auditoría para evitar errores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="datos" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">03</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Análisis de datos &amp; reporting</h2>
+    </div>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:640px;margin-bottom:44px;text-wrap:pretty">La capa que va antes de la estrategia: extraer, ordenar y proyectar los datos para que la decisión ya venga sustentada.</p>
+
+    <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;margin-bottom:16px;backdrop-filter:blur(14px)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Infraestructura</div>
+        <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Power BI · DAX · Power Query</div>
+      </div>
+      <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Power BI desde cero</h3>
+      <p style="font-size:15px;line-height:1.55;color:#f5f5f7;max-width:760px;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> la base de reporting de la empresa, construida desde cero — modelo de datos con tablas de calendario en DAX conectado a las fuentes del negocio. Hoy lo usan más de 30 personas entrenadas por mí, en cuatro frentes distintos.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="width:100%;aspect-ratio:16/10;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden"><div class="dash-slot" data-slot="dash-financiero" style="position:relative;width:100%;height:100%"><img data-dash-img="dash-financiero" alt="Captura del dashboard financiero" style="display:none;width:100%;height:100%;object-fit:cover"><div data-dash-placeholder style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;color:#6e6e73;line-height:1.4">Captura del dashboard financiero</div></div></div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em">Financiero</div>
+          <div style="font-size:13px;color:#a1a1a6;line-height:1.4">Rentabilidad, cartera y comportamiento de costos.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="width:100%;aspect-ratio:16/10;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden"><div class="dash-slot" data-slot="dash-operativo" style="position:relative;width:100%;height:100%"><img data-dash-img="dash-operativo" alt="Captura del dashboard operativo" style="display:none;width:100%;height:100%;object-fit:cover"><div data-dash-placeholder style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;color:#6e6e73;line-height:1.4">Captura del dashboard operativo</div></div></div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em">Operativo</div>
+          <div style="font-size:13px;color:#a1a1a6;line-height:1.4">Inventario, abastecimiento y ejecución diaria.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="width:100%;aspect-ratio:16/10;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden"><div class="dash-slot" data-slot="dash-comercial" style="position:relative;width:100%;height:100%"><img data-dash-img="dash-comercial" alt="Captura del dashboard comercial" style="display:none;width:100%;height:100%;object-fit:cover"><div data-dash-placeholder style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;color:#6e6e73;line-height:1.4">Captura del dashboard comercial</div></div></div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em">Comercial</div>
+          <div style="font-size:13px;color:#a1a1a6;line-height:1.4">Venta por línea, sucursal y vendedor.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="width:100%;aspect-ratio:16/10;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden"><div class="dash-slot" data-slot="dash-seguimiento" style="position:relative;width:100%;height:100%"><img data-dash-img="dash-seguimiento" alt="Captura del dashboard de seguimiento" style="display:none;width:100%;height:100%;object-fit:cover"><div data-dash-placeholder style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;color:#6e6e73;line-height:1.4">Captura del dashboard de seguimiento</div></div></div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:-0.01em">Seguimiento por cliente</div>
+          <div style="font-size:13px;color:#a1a1a6;line-height:1.4">Caídas, inactivos y avance de cartera. Lo usan los vendedores y el estratégico comercial para seguir a todos los clientes de la empresa.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">ETL &amp; proyección</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Pronóstico de ventas estacional</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> proyección de ventas a 6 meses para los segmentos 2WH y 3WH — la lectura de hacia dónde va el mercado y el negocio, sobre la que después se arman las estrategias.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> un ETL limpia y consolida el histórico real, calcula índices estacionales y los aplica a la tendencia actual, mes por mes, por segmento.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Automatización</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Reportes automáticos</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> pipeline que arma y distribuye reportes sin que nadie los toque manualmente.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> Power Automate dispara la exportación desde Power BI, un modelo de IA la analiza, y el resultado sale por el canal que use el equipo — Slack, Teams o correo. Agregar un canal nuevo es cambiar el último paso, no el pipeline.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ia" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">04</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Inteligencia artificial &amp; vibe coding</h2>
+      <span style="margin-left:auto;font-size:13px;color:#6e6e73;text-align:right;line-height:1.4">Claude · Gemini · GPT</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Modelos</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Trabajo diario con Claude, Gemini y GPT</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> uso de los tres modelos principales como parte del stack de trabajo, no como experimento.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> cada modelo entra donde rinde mejor — análisis de datos, redacción, código o revisión — con instrucciones y contexto propios ya afinados.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Vibe coding</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Construcción de software con IA</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> aplicaciones y herramientas propias construidas de punta a punta con asistencia de IA.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> del planteamiento del problema al despliegue, sin equipo de desarrollo detrás — el criterio de negocio define qué se construye y la IA acelera la ejecución.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Flujos</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Automatización con IA de por medio</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> flujos donde la IA hace el trabajo repetitivo de análisis y comunicación.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> integraciones entre las fuentes de datos, el modelo y el canal de salida — reportes, alertas y respuestas que llegan solos a quien los necesita.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Formación</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Cursos y capacitación en IA</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> cursos en preparación para equipos y personas que quieren usar IA en su trabajo real.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> mismo método con el que entrené a más de 30 personas en Power BI: casos propios, no teoría — del prompt al flujo que queda funcionando.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="github" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">05</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Código &amp; repositorios</h2>
+      <a href="https://github.com/samuelmonterroso47-af" target="_blank" rel="noopener" style="margin-left:auto;font-size:13px;color:#2997ff">github.com/samuelmonterroso47-af →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Dashboard</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">HTML · Tailwind · JS</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Evaluación de mercado 3WH</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> módulo que calcula participación de mercado de mototaxis por municipio cruzando venta real contra la flota estimada.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> dashboard estático sin dependencias, con filtros dinámicos por municipio, recomendaciones automáticas según umbrales de participación y exportación a CSV.</p>
+        <a href="https://github.com/samuelmonterroso47-af/Gestion-Productos-Marcas" target="_blank" rel="noopener" style="font-size:13px;color:#2997ff;margin-top:2px">Gestion-Productos-Marcas →</a>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Aplicación</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Python · Streamlit · SQLAlchemy</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Gestión de sala de ventas 2WH &amp; 3WH</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> lo que empezó como análisis de 4 tiendas en Jupyter, convertido en aplicación de sala de ventas para repuestos de moto y motocarro.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> base de datos relacional con inventario, CRM y ventas, y un dashboard en tiempo real con ingresos, rotación por categoría y satisfacción del cliente.</p>
+        <a href="https://github.com/samuelmonterroso47-af/Analisis_Tiendas" target="_blank" rel="noopener" style="font-size:13px;color:#2997ff;margin-top:2px">Analisis_Tiendas →</a>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Finanzas personales</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">React</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Dashboard financiero personal</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> aplicación propia para controlar tarjetas de crédito y deudas.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> da seguimiento a saldos, fechas de corte y alertas, en vez de depender de hojas sueltas.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">En desarrollo</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">IA · Google Sheets</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Agente WhatsApp + Sheets</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> asistente que registra y responde datos directo desde WhatsApp.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> conecta un modelo de IA a Google Sheets en ambas direcciones — escribir un mensaje actualiza la hoja, y la hoja puede responder por mensaje.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Visión por computadora</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Python · OpenCV · MediaPipe</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Gesture Vision AI</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> reconocimiento en tiempo real de rostro, manos, ojos y gestos desde la cámara.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> clasifica poses de mano, guiños y apertura de boca sobre los landmarks de MediaPipe, con modo de rastreo y un modo juego de atrapar figuras.</p>
+        <a href="https://github.com/samuelmonterroso47-af/gesture-vision-ai-" target="_blank" rel="noopener" style="font-size:13px;color:#2997ff;margin-top:2px">gesture-vision-ai →</a>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Android</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Kotlin · Compose · CameraX</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Gesture Phone Control</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> app que controla el teléfono con gestos de mano, para cuando tienes las manos ocupadas.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> un servicio de accesibilidad ejecuta scroll, atrás, inicio y notificaciones a partir de poses sostenidas frente a la cámara frontal, con tutorial guiado y compilación automática del APK en CI.</p>
+        <a href="https://github.com/samuelmonterroso47-af/gesture-phone-control" target="_blank" rel="noopener" style="font-size:13px;color:#2997ff;margin-top:2px">gesture-phone-control →</a>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Plataforma interna</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Next.js · TypeScript</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Etiquetado de contactos</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> plataforma interna que ordena y clasifica los contactos que entran por el canal de mensajería del grupo.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> aplicación web propia para que el equipo comercial trabaje sobre datos limpios. Repositorio privado.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Ministerial</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Next.js</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Himnario</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> aplicación de himnario para uso en el área ministerial.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> búsqueda y consulta de himnos desde el teléfono, sin depender del libro físico. Repositorio privado.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Práctica</div>
+          <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">14 repositorios</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">El resto del repositorio</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> pruebas donde reviso herramientas nuevas antes de llevarlas a un proyecto real.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px">
+          <span style="font-size:12.5px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:7px 13px">can-asistente</span>
+          <span style="font-size:12.5px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:7px 13px">sistema-de-registro</span>
+          <span style="font-size:12.5px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:7px 13px">Phyton_Data_Science</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="emprendimientos" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">06</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Emprendimientos &amp; estudios</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;grid-column:1/-1;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Research</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Estudios de mercado propios</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;max-width:760px;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> investigación de mercado antes de invertir o de recomendar una jugada — proveedores, márgenes, competencia y tamaño real de la demanda.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:10px">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Servicios automotrices</div>
+            <div style="font-size:14px;color:#a1a1a6;line-height:1.45">Autos, motos y mototaxis: quién atiende el mercado, con qué servicio y a qué precio. Hecho por trabajo.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Productos ecológicos</div>
+            <div style="font-size:14px;color:#a1a1a6;line-height:1.45">Demanda y disposición a pagar por producto sostenible en el mercado local.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Energía solar</div>
+            <div style="font-size:14px;color:#a1a1a6;line-height:1.45">Mapeo del mercado de lámparas solares en Guatemala — proveedores, márgenes y competencia.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Productos rentables</div>
+            <div style="font-size:14px;color:#a1a1a6;line-height:1.45">Barrido de categorías por margen y rotación para decidir en qué vale la pena entrar.</div>
+          </div>
+        </div>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:linear-gradient(160deg,rgba(242,168,59,0.14),rgba(255,255,255,0.04));border:1px solid rgba(242,168,59,0.28);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#f2a83b">Apicultura</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Enjambre</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> negocio y hobby a la vez: el cuidado de las abejas, el mantenimiento de las colmenas y la extracción de la miel, hasta la venta del producto terminado.</p>
+        <p style="font-size:15px;line-height:1.55;color:#c9c9ce;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> marca propia de miel con venta en línea en desarrollo.</p>
+        <p style="font-size:15px;line-height:1.55;color:#c9c9ce;text-wrap:pretty"><b style="font-weight:600">Lo que sigue:</b> una plataforma sobre el cuidado de la abeja que documente todo el ciclo — de la colmena al producto final — para quien quiera empezar.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Retail</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Agiva</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> reventa de productos de barbería, principalmente ceras para cabello.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> venta directa por Facebook Marketplace, con expansión en curso hacia venta B2B a barberías.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Otros ingresos</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Gumballs &amp; bolsa</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> frentes adicionales de ingreso paralelo.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> operación de máquinas expendedoras de dulces (gumball) e inversión en mercado de valores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">07</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Cursos y guías</h2>
+      <span style="margin-left:auto;font-size:13px;color:#6e6e73">En preparación · video grabado + guía descargable</span>
+    </div>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:640px;margin-bottom:44px;text-wrap:pretty">Lo que uso todos los días, enseñado con casos reales. Cada curso es video grabado con su guía en PDF. Escribime si querés que te avise cuando abra.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-bottom:16px">
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Curso</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Excel</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">De la hoja suelta al modelo que aguanta decisiones: fórmulas vivas, auditoría del cálculo y estructura que otro puede usar sin romperla.</p>
+        <button type="button" class="interest-btn" data-type="curso" data-item="Excel" style="font-size:14px;color:#2997ff;margin-top:auto;padding-top:8px;background:transparent;border:none;cursor:pointer;font:inherit;text-align:left">Avisarme →</button>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Curso</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Power BI</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Modelo de datos, DAX y tablas de calendario — el mismo camino con el que levanté el reporting de una empresa desde cero y entrené a más de 30 personas.</p>
+        <button type="button" class="interest-btn" data-type="curso" data-item="Power BI" style="font-size:14px;color:#2997ff;margin-top:auto;padding-top:8px;background:transparent;border:none;cursor:pointer;font:inherit;text-align:left">Avisarme →</button>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#f2a83b">Curso</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Apicultura</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">El ciclo completo desde la práctica de Enjambre: cuidado de la abeja, mantenimiento de la colmena, extracción y producto final listo para vender.</p>
+        <button type="button" class="interest-btn" data-type="curso" data-item="Apicultura" style="font-size:14px;color:#f2a83b;margin-top:auto;padding-top:8px;background:transparent;border:none;cursor:pointer;font:inherit;text-align:left">Avisarme →</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px">
+      <div data-reveal="" style="border:1px dashed rgba(255,255,255,0.18);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Guía</div>
+          <div style="font-size:12px;font-weight:600;color:#060709;background:#f5f5f7;border-radius:980px;padding:4px 11px">Gratis</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Empezar a usar IA</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Para quien nunca ha pasado del chat: qué pedirle, cómo darle contexto y en qué tareas de tu trabajo conviene meterla primero.</p>
+        <button type="button" class="interest-btn" data-type="guia" data-item="Empezar a usar IA" style="font-size:14px;color:#2997ff;margin-top:auto;padding-top:8px;background:transparent;border:none;cursor:pointer;font:inherit;text-align:left">Pedirla →</button>
+      </div>
+      <div data-reveal="" style="border:1px dashed rgba(255,255,255,0.18);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Guía</div>
+          <div style="font-size:12px;font-weight:600;color:#060709;background:#f5f5f7;border-radius:980px;padding:4px 11px">Gratis</div>
+        </div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Estrategias comerciales, lo básico</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Cómo se arma una estrategia que sí mueve la venta: leer la cartera, elegir a quién visitar y ponerle un incentivo que el vendedor entienda.</p>
+        <button type="button" class="interest-btn" data-type="guia" data-item="Estrategias comerciales, lo básico" style="font-size:14px;color:#2997ff;margin-top:auto;padding-top:8px;background:transparent;border:none;cursor:pointer;font:inherit;text-align:left">Pedirla →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="formacion" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">08</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Formación</h2>
+    </div>
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:0;margin-bottom:48px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.1)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.015em">Maestría en Administración Financiera</div>
+          <div style="font-size:14px;color:#6e6e73">Posgrado</div>
+        </div>
+        <div style="font-size:13px;font-weight:500;color:#6e6e73;white-space:nowrap">MAF</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.1)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.015em">Licenciatura en Administración de Empresas</div>
+          <div style="font-size:14px;color:#6e6e73">Pregrado</div>
+        </div>
+        <div style="font-size:13px;font-weight:500;color:#6e6e73;white-space:nowrap">LAE</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.1)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.015em">Ciencia de Datos</div>
+          <div style="font-size:14px;color:#6e6e73">Alura LATAM</div>
+        </div>
+        <div style="font-size:13px;font-weight:500;color:#6e6e73;white-space:nowrap">Alura</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.015em">Diplomado en Teología</div>
+          <div style="font-size:14px;color:#6e6e73">Dos años de estudio, más cursos de discipulado</div>
+        </div>
+        <div style="font-size:13px;font-weight:500;color:#6e6e73;white-space:nowrap">2 años</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px">
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Datos &amp; herramientas</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Análisis de datos (Google)</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Python &amp; Pandas</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Jupyter</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Tableau</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">JSON</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Excel avanzado</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Power BI financiero</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Programación básica</span>
+        </div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Negocio &amp; liderazgo</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Liderazgo</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Apps para emprendedores</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Marketing para emprendedores</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Meta Ads</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Campañas publicitarias</span>
+        </div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Otros</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Primeros auxilios</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Reservista militar</span>
+          <span style="font-size:13px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:8px 14px">Discipulado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fuera" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">09</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Fuera del escritorio</h2>
+    </div>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:600px;margin-bottom:28px;text-wrap:pretty">Curioso por oficio: aprender de áreas distintas es lo que me deja conectar cosas que normalmente no se cruzan.</p>
+    <div data-reveal="" style="display:flex;flex-wrap:wrap;gap:8px">
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Correr</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Nadar</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Hiking</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Bici</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Deportes extremos</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Aire libre</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">El campo</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Leer</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Cantar</span>
+      <span style="font-size:14px;font-weight:500;color:#f5f5f7;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:980px;padding:9px 16px">Música clásica</span>
+    </div>
+  </section>
+
+  <footer id="contacto" style="border-top:1px solid rgba(255,255,255,0.1);background:rgba(6,7,9,0.72);backdrop-filter:blur(14px);padding:110px 0 44px">
+    <div style="max-width:1140px;margin:0 auto;padding:0 24px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff;margin-bottom:16px">Hablemos</div>
+      <h2 data-reveal="" style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.08;max-width:820px;text-wrap:balance">¿Un proyecto de datos, un sistema por construir, o negocio en el que colaborar?</h2>
+
+      <form id="contact-form" data-reveal="" style="margin-top:40px;max-width:560px;display:flex;flex-direction:column;gap:14px" novalidate>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+          <input type="text" name="name" placeholder="Nombre" autocomplete="name" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:14px 16px;color:#f5f5f7;font:inherit;font-size:15px">
+          <input type="email" name="email" placeholder="Email" autocomplete="email" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:14px 16px;color:#f5f5f7;font:inherit;font-size:15px">
+        </div>
+        <textarea name="message" placeholder="Contame en qué estás pensando" required rows="4" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:14px 16px;color:#f5f5f7;font:inherit;font-size:15px;resize:vertical"></textarea>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <button type="submit" style="background:#2997ff;color:#fff;font-size:15px;font-weight:600;padding:13px 26px;border:none;border-radius:980px;cursor:pointer;font-family:inherit" style-hover="background:#4ea8ff">Enviar mensaje</button>
+          <span data-form-status style="font-size:13px;color:#a1a1a6"></span>
+        </div>
+      </form>
+
+      <div style="margin-top:48px;display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap">
+          <span style="font-size:13px;color:#6e6e73">Email</span>
+          <a href="mailto:samuelmonterroso47@gmail.com" style="font-size:16px;color:#f5f5f7" style-hover="color:#2997ff">samuelmonterroso47@gmail.com</a>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap">
+          <span style="font-size:13px;color:#6e6e73">WhatsApp</span>
+          <a href="https://wa.me/50246314669" target="_blank" rel="noopener" style="font-size:16px;color:#f5f5f7" style-hover="color:#2997ff">+502 4631 4669</a>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap">
+          <span style="font-size:13px;color:#6e6e73">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/esvin-samuel" target="_blank" rel="noopener" style="font-size:16px;color:#f5f5f7" style-hover="color:#2997ff">linkedin.com/in/esvin-samuel</a>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);flex-wrap:wrap">
+          <span style="font-size:13px;color:#6e6e73">GitHub</span>
+          <a href="https://github.com/samuelmonterroso47-af" target="_blank" rel="noopener" style="font-size:16px;color:#f5f5f7" style-hover="color:#2997ff">github.com/samuelmonterroso47-af</a>
+        </div>
+      </div>
+      <div style="margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:#4a4a4f">
+        <span>ESCM — Esvin Samuel CM</span>
+        <span>Guatemala</span>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+  <div id="interest-modal" style="display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:24px;background:rgba(6,7,9,0.7);backdrop-filter:blur(6px)">
+    <div style="width:100%;max-width:420px;background:#0c0d10;border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;position:relative">
+      <button type="button" id="interest-modal-close" aria-label="Cerrar" style="position:absolute;top:16px;right:16px;background:transparent;border:none;color:#a1a1a6;font-size:20px;line-height:1;cursor:pointer;padding:4px">×</button>
+      <div id="interest-modal-eyebrow" style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff"></div>
+      <h3 id="interest-modal-title" style="font-size:20px;font-weight:600;letter-spacing:-0.02em">Avisame cuando esté listo</h3>
+      <p style="font-size:14px;color:#a1a1a6;line-height:1.5">Dejá tu email y te escribo directo cuando esté disponible.</p>
+      <form id="interest-form" style="display:flex;flex-direction:column;gap:12px" novalidate>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+        <input type="email" name="email" placeholder="Tu email" autocomplete="email" required style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:13px 16px;color:#f5f5f7;font:inherit;font-size:15px">
+        <button type="submit" style="background:#2997ff;color:#fff;font-size:15px;font-weight:600;padding:12px 24px;border:none;border-radius:980px;cursor:pointer;font-family:inherit">Avisarme</button>
+        <span data-form-status style="font-size:13px;color:#a1a1a6"></span>
+      </form>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>

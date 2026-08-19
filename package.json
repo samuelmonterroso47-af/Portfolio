@@ -1,0 +1,10 @@
+{
+  "name": "esvin-samuel-cm-portafolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portafolio de Esvin Samuel CM — sitio estático con backend en funciones serverless de Vercel (Supabase + Resend).",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "resend": "^4.0.1"
+  }
+}

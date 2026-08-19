@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Dashboards Power BI</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#060709;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",sans-serif;padding:40px 20px;line-height:1.5}
+  main{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-0.02em}
+  p.hint{color:#a1a1a6;font-size:14px}
+  label{font-size:13px;color:#a1a1a6;display:block;margin-bottom:6px}
+  input[type="password"]{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:12px;padding:12px 14px;color:#f5f5f7;font:inherit;font-size:15px}
+  .slot{background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
+  .slot h2{font-size:16px;font-weight:600}
+  .slot img{width:100%;max-width:320px;border-radius:12px;display:none}
+  input[type="file"]{color:#a1a1a6;font-size:13px}
+  .status{font-size:13px}
+  .status.ok{color:#8fd19e}
+  .status.err{color:#ff6961}
+  button{background:#2997ff;color:#fff;font-size:14px;font-weight:600;padding:10px 20px;border:none;border-radius:980px;cursor:pointer;font-family:inherit}
+  button:disabled{opacity:0.5;cursor:default}
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <h1>Capturas de Power BI</h1>
+    <p class="hint">Subí las capturas de los 4 dashboards del portafolio. Se guardan en Supabase Storage y quedan visibles para todos los visitantes. Página no listada — no compartas el enlace.</p>
+  </div>
+
+  <div>
+    <label for="secret">Clave de administrador</label>
+    <input type="password" id="secret" autocomplete="off" placeholder="ADMIN_SECRET">
+  </div>
+
+  <div class="slot" data-slot="dash-financiero">
+    <h2>Financiero</h2>
+    <img alt="preview">
+    <input type="file" accept="image/png,image/jpeg,image/webp">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button type="button">Subir</button>
+      <span class="status"></span>
+    </div>
+  </div>
+
+  <div class="slot" data-slot="dash-operativo">
+    <h2>Operativo</h2>
+    <img alt="preview">
+    <input type="file" accept="image/png,image/jpeg,image/webp">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button type="button">Subir</button>
+      <span class="status"></span>
+    </div>
+  </div>
+
+  <div class="slot" data-slot="dash-comercial">
+    <h2>Comercial</h2>
+    <img alt="preview">
+    <input type="file" accept="image/png,image/jpeg,image/webp">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button type="button">Subir</button>
+      <span class="status"></span>
+    </div>
+  </div>
+
+  <div class="slot" data-slot="dash-seguimiento">
+    <h2>Seguimiento por cliente</h2>
+    <img alt="preview">
+    <input type="file" accept="image/png,image/jpeg,image/webp">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button type="button">Subir</button>
+      <span class="status"></span>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var secretInput = document.getElementById("secret");
+  try { secretInput.value = sessionStorage.getItem("escm-admin-secret") || ""; } catch (e) {}
+
+  function downscale(file, maxDim) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var reader = new FileReader();
+      reader.onload = function () { img.src = reader.result; };
+      reader.onerror = reject;
+      img.onload = function () {
+        var scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
+      };
+      img.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  document.querySelectorAll(".slot").forEach(function (slotEl) {
+    var slot = slotEl.getAttribute("data-slot");
+    var fileInput = slotEl.querySelector('input[type="file"]');
+    var btn = slotEl.querySelector("button");
+    var status = slotEl.querySelector(".status");
+    var img = slotEl.querySelector("img");
+
+    btn.addEventListener("click", function () {
+      var file = fileInput.files[0];
+      if (!file) { status.textContent = "Elegí una imagen primero."; status.className = "status err"; return; }
+      var secret = secretInput.value.trim();
+      if (!secret) { status.textContent = "Ingresá la clave de administrador."; status.className = "status err"; return; }
+      try { sessionStorage.setItem("escm-admin-secret", secret); } catch (e) {}
+
+      btn.disabled = true;
+      status.textContent = "Procesando imagen…";
+      status.className = "status";
+
+      downscale(file, 1600).then(function (dataUrl) {
+        status.textContent = "Subiendo…";
+        return fetch("/api/dashboard", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-admin-secret": secret },
+          body: JSON.stringify({ slot: slot, dataUrl: dataUrl })
+        });
+      }).then(function (res) {
+        return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+      }).then(function (r) {
+        btn.disabled = false;
+        if (r.ok) {
+          status.textContent = "Listo.";
+          status.className = "status ok";
+          img.src = r.data.url;
+          img.style.display = "block";
+        } else {
+          status.textContent = r.data.error || "Error al subir.";
+          status.className = "status err";
+        }
+      }).catch(function () {
+        btn.disabled = false;
+        status.textContent = "Error de red al subir.";
+        status.className = "status err";
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
