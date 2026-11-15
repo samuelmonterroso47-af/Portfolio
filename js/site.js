@@ -429,6 +429,16 @@
     });
   }
 
+  // ---------- Capturas estáticas (img/) — se muestran solo si el archivo existe ----------
+  Array.prototype.forEach.call(root.querySelectorAll("[data-dash-img][data-static-src]"), function (img) {
+    var placeholder = img.parentElement.querySelector("[data-dash-placeholder]");
+    img.onload = function () {
+      img.style.display = "block";
+      if (placeholder) placeholder.style.display = "none";
+    };
+    img.src = img.getAttribute("data-static-src");
+  });
+
   // ---------- Backend: capturas de dashboards Power BI ----------
   fetch("/api/dashboard").then(function (res) { return res.ok ? res.json() : null; }).then(function (data) {
     if (!data || !data.images) return;
