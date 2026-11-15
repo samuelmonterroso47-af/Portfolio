@@ -80,6 +80,21 @@
   try { if (localStorage.getItem("escm-theme") === "light") state.light = true; } catch (e) {}
   applyTheme();
 
+  // ---------- Menú móvil ----------
+  var menuToggle = document.getElementById("menu-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  function setMenu(open) {
+    if (!menuToggle || !mobileNav) return;
+    mobileNav.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    menuToggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  }
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener("click", function () { setMenu(!mobileNav.classList.contains("open")); });
+    mobileNav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+  }
+
   // ---------- style-hover: hover puntual sobre propiedades declaradas ----------
   function parseDecls(str) {
     var out = {};
@@ -123,7 +138,7 @@
       var t0 = performance.now(), dur = 1100;
       (function step() {
         var p = Math.min(1, (performance.now() - t0) / dur);
-        e.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        e.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US");
         if (p < 1) requestAnimationFrame(step);
       })();
     });

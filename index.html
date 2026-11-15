@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Esvin Samuel CM — Growth &amp; AI Partner</title>
-<meta name="description" content="Growth & AI Partner: estrategia comercial, datos e IA aplicada. Power BI, DAX, automatizacion y sistemas propios, desde Guatemala.">
+<title>Esvin Samuel CM — Estratega Comercial y Financiero</title>
+<meta name="description" content="Estratega comercial y financiero: decisiones de venta, margen y cartera basadas en datos. Power BI, IA y automatizacion, desde Guatemala.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,15 @@
   [data-reveal].in{opacity:1;transform:none}
   input::placeholder,textarea::placeholder{color:#6e6e73}
   input:focus,textarea:focus{outline:none;border-color:#2997ff}
-  @media (max-width: 899px) { #site-nav { display: none !important; } }
+  #menu-toggle{display:none}
+  #mobile-nav{display:none}
+  #mobile-nav.open{display:block}
+  @media (max-width: 899px) {
+    #site-nav { display: none !important; }
+    #menu-toggle { display: flex; }
+    #header-contact { display: none !important; }
+  }
+  @media (min-width: 900px) { #mobile-nav.open { display: none; } }
   #interest-modal.open{display:flex !important}
 </style>
 </head>
@@ -36,6 +44,7 @@
     <div style="max-width:1140px;margin:0 auto;padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;gap:24px">
       <a href="#top" style="font-size:15px;font-weight:600;letter-spacing:-0.01em;color:#f5f5f7">Esvin Samuel CM</a>
       <nav id="site-nav" style="display:flex;align-items:center;gap:22px;font-size:12px;font-weight:500;color:#a1a1a6">
+        <a href="#servicios" style="color:#a1a1a6" style-hover="color:#f5f5f7">Servicios</a>
         <a href="#sobre" style="color:#a1a1a6" style-hover="color:#f5f5f7">Sobre</a>
         <a href="#estrategia" style="color:#a1a1a6" style-hover="color:#f5f5f7">Estrategia</a>
         <a href="#datos" style="color:#a1a1a6" style-hover="color:#f5f5f7">Datos</a>
@@ -49,40 +58,74 @@
         <button type="button" id="theme-toggle" style="display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#f5f5f7;font:inherit;font-size:12px;font-weight:500;padding:7px 14px;border-radius:980px;cursor:pointer" style-hover="background:rgba(255,255,255,0.13)">
           <span style="width:7px;height:7px;border-radius:50%;background:#f2a83b"></span><span id="theme-label">Claro</span>
         </button>
-        <a href="#contacto" style="background:#f5f5f7;color:#060709;font-size:12px;font-weight:600;padding:8px 16px;border-radius:980px;white-space:nowrap" style-hover="background:#fff">Contacto</a>
+        <a id="header-contact" href="#contacto" style="background:#f5f5f7;color:#060709;font-size:12px;font-weight:600;padding:8px 16px;border-radius:980px;white-space:nowrap" style-hover="background:#fff">Contacto</a>
+        <button type="button" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav" style="width:36px;height:36px;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:50%;cursor:pointer;padding:0">
+          <span style="display:block;width:14px;height:1.5px;border-radius:2px;background:#f5f5f7"></span>
+          <span style="display:block;width:14px;height:1.5px;border-radius:2px;background:#f5f5f7"></span>
+        </button>
       </div>
     </div>
+    <nav id="mobile-nav" aria-label="Secciones" style="border-top:1px solid rgba(255,255,255,0.08);max-height:calc(100vh - 56px);overflow-y:auto">
+      <div style="padding:8px 24px 18px;display:flex;flex-direction:column">
+        <a href="#servicios" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Servicios</a>
+        <a href="#sobre" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Sobre</a>
+        <a href="#estrategia" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Estrategia</a>
+        <a href="#datos" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Datos</a>
+        <a href="#ia" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">IA</a>
+        <a href="#github" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Código</a>
+        <a href="#emprendimientos" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Emprendimientos</a>
+        <a href="#cursos" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Cursos</a>
+        <a href="#formacion" style="color:#f5f5f7;font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)">Formación</a>
+        <a href="#contacto" style="margin-top:16px;align-self:flex-start;background:#f5f5f7;color:#060709;font-size:15px;font-weight:600;padding:11px 22px;border-radius:980px">Contacto</a>
+      </div>
+    </nav>
     <div style="height:1px;background:rgba(255,255,255,0.06)">
       <div id="progress-bar" style="height:1px;width:0%;background:linear-gradient(90deg,#2997ff,#f2a83b)"></div>
     </div>
   </header>
 
-  <section id="top" style="max-width:1140px;margin:0 auto;padding:150px 24px 120px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:82vh;justify-content:center">
+  <section id="top" style="position:relative;isolation:isolate;max-width:1140px;margin:0 auto;padding:150px 24px 120px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:82vh;justify-content:center">
+    <div aria-hidden="true" style="position:absolute;inset:60px -24px 0;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(6,7,9,0.82) 0%,rgba(6,7,9,0.6) 55%,rgba(6,7,9,0) 100%);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);-webkit-mask-image:radial-gradient(closest-side,#000 60%,transparent 100%);mask-image:radial-gradient(closest-side,#000 60%,transparent 100%)"></div>
     <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#a1a1a6;margin-bottom:26px;border:1px solid rgba(255,255,255,0.12);border-radius:980px;padding:7px 15px;background:rgba(255,255,255,0.03)">
       <span style="width:6px;height:6px;border-radius:50%;background:#f2a83b;box-shadow:0 0 12px #f2a83b"></span>Guatemala
     </div>
-    <h1 style="font-size:clamp(42px,6.6vw,92px);font-weight:700;letter-spacing:-0.04em;line-height:1.04;max-width:1000px;text-wrap:balance">Esvin Samuel CM<br><span style="color:#6e6e73;font-weight:600">Growth &amp; AI Partner</span></h1>
-    <p style="margin-top:30px;max-width:640px;font-size:19px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Growth &amp; AI Partner. Construyo la infraestructura de reporting que usan las áreas comerciales para decidir, y en paralelo levanto mis propios negocios — de la hoja de cálculo al negocio en marcha.</p>
+    <h1 style="font-size:clamp(42px,6.6vw,92px);font-weight:700;letter-spacing:-0.04em;line-height:1.04;max-width:1000px;text-wrap:balance">Esvin Samuel CM<br><span style="color:#6e6e73;font-weight:600">Estrategia comercial y financiera</span></h1>
+    <p style="margin-top:30px;max-width:640px;font-size:19px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Ayudo a direcciones comerciales y financieras a decidir con datos: dónde crecer, qué cliente priorizar y dónde se está perdiendo margen o liquidez.</p>
     <div style="margin-top:38px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
-      <a href="#estrategia" style="background:#2997ff;color:#fff;font-size:15px;font-weight:600;padding:13px 26px;border-radius:980px" style-hover="background:#4ea8ff">Ver proyectos</a>
-      <a href="#contacto" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:#f5f5f7;font-size:15px;font-weight:500;padding:13px 26px;border-radius:980px" style-hover="background:rgba(255,255,255,0.13)">Escribirme</a>
+      <a href="#servicios" style="background:#2997ff;color:#fff;font-size:15px;font-weight:600;padding:13px 26px;border-radius:980px" style-hover="background:#4ea8ff">Cómo trabajo con empresas</a>
+      <a href="#estrategia" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:#f5f5f7;font-size:15px;font-weight:500;padding:13px 26px;border-radius:980px" style-hover="background:rgba(255,255,255,0.13)">Ver casos</a>
     </div>
     <div style="margin-top:70px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#4a4a4f">Bajá — la estructura se reconfigura</div>
   </section>
 
   <div style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#a1a1a6;margin-bottom:14px">Impacto de lo que construyo</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:12px">
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="50">0</span>+</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Colaboradores de la empresa trabajan con mis herramientas</div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="1500">0</span>+</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Clientes impactados directamente</div>
+      </div>
+      <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px);border-color:rgba(242,168,59,0.35)">
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1;font-size:clamp(28px,3.4vw,38px);color:#f2a83b">México → Nicaragua</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Impacto indirecto en México y Centroamérica, los países donde opera el grupo</div>
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px">
       <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
-        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="30">0</span>+</div>
-        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Personas entrenadas en Power BI</div>
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1">75 → 4</div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Boletas de depósito sin identificar al mes (≈Q100,000)</div>
       </div>
       <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
         <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="8">0</span>+</div>
         <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Sistemas y modelos construidos de cero</div>
       </div>
       <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
-        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="14">0</span></div>
-        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Repositorios propios en GitHub</div>
+        <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="474">0</span></div>
+        <div style="font-size:14px;color:#a1a1a6;line-height:1.4">Medidas en el modelo comercial que diseñé</div>
       </div>
       <div data-reveal="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px 28px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(14px)">
         <div style="font-size:clamp(36px,4.8vw,50px);font-weight:700;letter-spacing:-0.035em;line-height:1"><span data-count="2">0</span></div>
@@ -91,14 +134,48 @@
     </div>
   </div>
 
-  <section id="sobre" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+  <section id="servicios" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
+    <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#f2a83b">→</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Cómo trabajo con empresas</h2>
+    </div>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:660px;margin-bottom:44px;text-wrap:pretty">Para dueños, gerentes comerciales y financieros que tienen datos de venta, costos y cobro, pero no una lectura clara de qué decidir con ellos.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,228px),1fr));gap:16px">
+      <div data-reveal="" data-tilt="" style="background:linear-gradient(160deg,rgba(242,168,59,0.14),rgba(255,255,255,0.04));border:1px solid rgba(242,168,59,0.28);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#f2a83b">Punto de partida</div>
+        <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Diagnóstico comercial y financiero</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Rentabilidad por cliente, línea y vendedor; estado de la cartera y del flujo. Sale con un informe de hallazgos y prioridades concretas.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Dirección</div>
+        <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Tablero de dirección</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Venta, margen y cobro en un solo lugar, construido en Power BI sobre tus fuentes reales y con acceso por usuario.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Estrategia</div>
+        <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Pronósticos, metas e incentivos</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Proyección de venta, metas por cartera y esquemas de incentivo que el vendedor entiende y la empresa puede pagar.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Continuidad</div>
+        <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Acompañamiento mensual</h3>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty">Revisión mensual de números y decisiones, con reportes automatizados con IA para que el equipo decida en lugar de armar Excel.</p>
+      </div>
+    </div>
+    <div data-reveal="" style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <a href="#contacto" style="background:#f5f5f7;color:#060709;font-size:15px;font-weight:600;padding:13px 26px;border-radius:980px" style-hover="background:#fff">Agendar diagnóstico de 30 min</a>
+      <span style="font-size:14px;color:#6e6e73">Sin costo · por videollamada o presencial en Guatemala</span>
+    </div>
+  </section>
+
+  <section id="sobre"style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
     <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:44px">
       <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">01</span>
       <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Sobre mí</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:start">
       <div data-reveal="" style="display:flex;flex-direction:column;gap:18px;max-width:540px">
-        <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty"><strong style="color:#f5f5f7;font-weight:600">Growth &amp; AI Partner</strong> — estrategia comercial, datos e IA aplicada, con base operativa 100% en piso de negocio: ventas, auditoría financiera, sistemas, gerencia comercial, créditos y mercadeo pasan por mi trabajo antes de llegar a una decisión.</p>
+        <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty"><strong style="color:#f5f5f7;font-weight:600">Estratega comercial y financiero</strong>, con Maestría en Administración Financiera y experiencia en banca, y con base operativa 100% en piso de negocio: ventas, auditoría financiera, sistemas, gerencia comercial, créditos y mercadeo pasan por mi trabajo antes de llegar a una decisión.</p>
         <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty">Mi trabajo empieza donde termina el reporte manual: modelos de proyección, dashboards ejecutivos, automatización y sistemas que otras áreas usan todos los días sin pensar en cómo están construidos.</p>
         <p style="font-size:17px;line-height:1.6;color:#a1a1a6;text-wrap:pretty">Fuera del horario corporativo, aplico lo mismo a negocios propios — de la idea a la venta, sin depender de que alguien más lo construya.</p>
         <p style="font-size:17px;line-height:1.6;color:#f5f5f7;text-wrap:pretty">Trabajo en varias áreas a la vez porque el problema casi nunca cabe en una sola: el hilo común es que encuentro el punto donde se pierde plata o tiempo, construyo la herramienta que lo resuelve y la dejo funcionando en manos de alguien más.</p>
@@ -122,10 +199,10 @@
   <section id="estrategia" style="max-width:1140px;margin:0 auto;padding:0 24px 120px">
     <div data-reveal="" style="display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap">
       <span style="font-size:13px;font-weight:600;letter-spacing:0.1em;color:#2997ff">02</span>
-      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Estrategias comerciales</h2>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-0.032em">Estrategia comercial y financiera</h2>
       <span style="margin-left:auto;font-size:13px;color:#6e6e73;text-align:right;line-height:1.4">El grupo · distribución<br>de llantas y repuestos (GT)</span>
     </div>
-    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:640px;margin-bottom:44px;text-wrap:pretty">Estrategias diseñadas y puestas a operar sobre la cartera: cómo se incentiva al vendedor y a quién hay que visitar primero.</p>
+    <p data-reveal="" style="font-size:17px;line-height:1.6;color:#a1a1a6;max-width:640px;margin-bottom:44px;text-wrap:pretty">Estrategias diseñadas y puestas a operar sobre la cartera: cómo se incentiva al vendedor, a quién hay que visitar primero y cómo se protege el dinero que ya entró.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px">
       <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
         <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Incentivos</div>
@@ -138,6 +215,18 @@
         <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Modelo de tiempos extras</h3>
         <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">La estrategia:</b> concentrar el esfuerzo comercial en los clientes que están comprando por debajo de su potencial real, en lugar de repartirlo parejo.</p>
         <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> cruza histórico de compra contra fórmulas de potencial de mercado y ordena a quién visitar primero, con doble cálculo de auditoría para evitar errores.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#f2a83b">Control financiero</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Depósitos sin identificar: de 75+ a 4</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">El problema:</b> más de 75 boletas al mes, cerca de Q100,000, estaban en el banco pero no en la cuenta del cliente correcto — saldos vencidos que ya estaban pagados y cierres que no cuadraban.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">El resultado:</b> 4 boletas pendientes al cierre, que después también se identificaron. Cartera bien aplicada y cobranza enfocada en lo que de verdad se debe.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#f2a83b">Auditoría</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Auditoría diaria: de Excel a Power BI</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">La estrategia:</b> revisar todos los días facturas, devoluciones, depósitos y ajustes de bodega, en lugar de descubrir los errores en el cierre de mes.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> empezó como un sistema de control en Excel y evolucionó a un panel de auditoría en Power BI, junto con auditorías de cartera de crédito y estados de cuenta.</p>
       </div>
     </div>
   </section>
@@ -155,7 +244,7 @@
         <div style="font-size:11.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#6e6e73">Power BI · DAX · Power Query</div>
       </div>
       <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Power BI desde cero</h3>
-      <p style="font-size:15px;line-height:1.55;color:#f5f5f7;max-width:760px;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> la base de reporting de la empresa, construida desde cero — modelo de datos con tablas de calendario en DAX conectado a las fuentes del negocio. Hoy lo usan más de 30 personas entrenadas por mí, en cuatro frentes distintos.</p>
+      <p style="font-size:15px;line-height:1.55;color:#f5f5f7;max-width:760px;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> la base de reporting de la empresa, construida desde cero — modelo de datos con tablas de calendario en DAX conectado a las fuentes del negocio: 39 tablas y 474 medidas, con seguridad por usuario. Hoy lo usan más de 50 colaboradores en cuatro frentes distintos.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px">
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="width:100%;aspect-ratio:16/10;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden"><div class="dash-slot" data-slot="dash-financiero" style="position:relative;width:100%;height:100%"><img data-dash-img="dash-financiero" alt="Captura del dashboard financiero" style="display:none;width:100%;height:100%;object-fit:cover"><div data-dash-placeholder style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:12px;color:#6e6e73;line-height:1.4">Captura del dashboard financiero</div></div></div>
@@ -192,6 +281,12 @@
         <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Reportes automáticos</h3>
         <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> pipeline que arma y distribuye reportes sin que nadie los toque manualmente.</p>
         <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> Power Automate dispara la exportación desde Power BI, un modelo de IA la analiza, y el resultado sale por el canal que use el equipo — Slack, Teams o correo. Agregar un canal nuevo es cambiar el último paso, no el pipeline.</p>
+      </div>
+      <div data-reveal="" data-tilt="" style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(14px)">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff">Optimización</div>
+        <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.02em;line-height:1.25">Rescate del reporte de cierre</h3>
+        <p style="font-size:15px;line-height:1.55;color:#f5f5f7;text-wrap:pretty"><b style="font-weight:600">Qué es:</b> revisión a fondo de un reporte de cierre lento que, además, mostraba un dato equivocado: la fecha del precio más bajo salía de otra fila.</p>
+        <p style="font-size:15px;line-height:1.55;color:#a1a1a6;text-wrap:pretty"><b style="font-weight:600">Cómo funciona:</b> se reescribió la consulta SQL, las columnas calculadas pasaron a medidas y los cálculos pesados se movieron a la base de datos. Resultado: el número correcto y un modelo más liviano.</p>
       </div>
     </div>
   </section>
@@ -522,7 +617,8 @@
   <footer id="contacto" style="border-top:1px solid rgba(255,255,255,0.1);background:rgba(6,7,9,0.72);backdrop-filter:blur(14px);padding:110px 0 44px">
     <div style="max-width:1140px;margin:0 auto;padding:0 24px">
       <div style="font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#2997ff;margin-bottom:16px">Hablemos</div>
-      <h2 data-reveal="" style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.08;max-width:820px;text-wrap:balance">¿Un proyecto de datos, un sistema por construir, o negocio en el que colaborar?</h2>
+      <h2 data-reveal="" style="font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.08;max-width:820px;text-wrap:balance">¿Tu empresa tiene datos, pero no claridad sobre dónde está el margen?</h2>
+      <p data-reveal="" style="margin-top:18px;font-size:17px;line-height:1.6;color:#a1a1a6;max-width:600px">Agendemos un diagnóstico inicial de 30 minutos, sin costo. Contame qué te preocupa hoy: venta, margen, cartera o reportes.</p>
 
       <form id="contact-form" data-reveal="" style="margin-top:40px;max-width:560px;display:flex;flex-direction:column;gap:14px" novalidate>
         <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
