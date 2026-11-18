@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gesture Vision AI</title>
+<meta name="description" content="Visión por computadora en el navegador: rostro, manos, ojos, gestos y un minijuego controlado con la mano. Todo se procesa en tu dispositivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#07090f; --panel:#101828; --line:#1f2a44; --text:#e6edf7; --muted:#8fa3bf; --blue:#2997ff; --green:#34c759; --amber:#f2a83b; --red:#ff6b6b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { background:var(--bg); color:var(--text); font-family:Manrope,system-ui,sans-serif; }
+  body { min-height:100vh; display:flex; flex-direction:column; }
+  header { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; padding:18px clamp(16px,4vw,36px); border-bottom:1px solid var(--line); }
+  h1 { font-size:clamp(20px,3vw,26px); font-weight:800; letter-spacing:-.02em; }
+  h1 span { color:var(--muted); font-weight:600; }
+  .sub { color:var(--muted); font-size:13px; margin-top:2px; }
+  .modes { display:flex; gap:6px; }
+  .modes button, .btn { background:transparent; border:1px solid var(--line); color:var(--muted); font:inherit; font-size:14px; font-weight:700; padding:9px 16px; border-radius:999px; cursor:pointer; }
+  .modes button.on { background:var(--text); color:var(--bg); border-color:var(--text); }
+  .btn.primary { background:var(--blue); border-color:var(--blue); color:#fff; font-size:16px; padding:13px 26px; }
+  main { flex:1; display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:18px; padding:18px clamp(16px,4vw,36px) 26px; max-width:1500px; width:100%; margin:0 auto; }
+  @media (max-width:900px){ main { grid-template-columns:minmax(0,1fr); } }
+  .stage { position:relative; background:#000; border:1px solid var(--line); border-radius:18px; overflow:hidden; aspect-ratio:16/9; }
+  .stage video { display:none; }
+  .stage canvas { position:absolute; inset:0; width:100%; height:100%; }
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:24px; background:radial-gradient(circle at 50% 40%, rgba(41,151,255,.15), rgba(7,9,15,.95) 70%); }
+  .overlay p { color:var(--muted); max-width:460px; font-size:14px; line-height:1.55; }
+  .overlay.hide { display:none; }
+  .hud { position:absolute; top:12px; left:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  .hud span { font:500 13px "JetBrains Mono",monospace; background:rgba(7,9,15,.75); border:1px solid var(--line); padding:6px 10px; border-radius:10px; }
+  .center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:rgba(7,9,15,.7); }
+  .center.hide { display:none; }
+  .center .big { font-size:clamp(26px,4vw,40px); font-weight:800; }
+  aside { display:flex; flex-direction:column; gap:12px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px; }
+  .card h2 { font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .row { display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-top:1px solid var(--line); font-size:14px; }
+  .row:first-of-type { border-top:0; }
+  .row b { font-weight:700; text-align:right; }
+  .row .k { color:var(--muted); }
+  .mono { font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--muted); }
+  .help { color:var(--muted); font-size:13px; line-height:1.55; }
+  .help li { margin-left:16px; margin-top:4px; }
+  footer { color:#4e6280; font-size:12px; text-align:center; padding:0 16px 22px; }
+  footer a { color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Gesture Vision AI <span>· navegador</span></h1>
+    <div class="sub">Rostro, manos, ojos y gestos en tiempo real. El video no sale de tu dispositivo.</div>
+  </div>
+  <div class="modes">
+    <button id="mode-track" class="on">Modo rastreo</button>
+    <button id="mode-game">Modo juego</button>
+  </div>
+</header>
+
+<main>
+  <div class="stage">
+    <video id="video" playsinline muted></video>
+    <canvas id="canvas"></canvas>
+    <div class="hud" id="hud"></div>
+    <div class="center hide" id="center"></div>
+    <div class="overlay" id="overlay">
+      <button class="btn primary" id="start">Activar cámara</button>
+      <p id="status">Se descargan los modelos de MediaPipe (unos segundos la primera vez) y se pide permiso para usar la cámara. Todo el procesamiento ocurre en tu navegador: no se graba ni se envía nada.</p>
+    </div>
+  </div>
+
+  <aside>
+    <div class="card" id="panel-track">
+      <h2>Detección en vivo</h2>
+      <div class="row"><span class="k">Mano 1</span><b id="g-h1">—</b></div>
+      <div class="row"><span class="k">Mano 2</span><b id="g-h2">—</b></div>
+      <div class="row"><span class="k">Ojos</span><b id="g-eyes">—</b></div>
+      <div class="row"><span class="k">Boca</span><b id="g-mouth">—</b></div>
+      <div class="row"><span class="k">EAR · MAR</span><b class="mono" id="g-ratios">—</b></div>
+    </div>
+    <div class="card">
+      <h2 id="help-title">Prueba estos gestos</h2>
+      <ul class="help" id="help">
+        <li>Mano abierta, puño, pulgar arriba</li>
+        <li>Señal de paz, señalando, llamada 🤙</li>
+        <li>Guiño con un ojo o cierra los dos</li>
+        <li>Abre la boca</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Cómo funciona</h2>
+      <p class="help">MediaPipe detecta 21 puntos por mano y 478 en el rostro. Los gestos se clasifican por la posición de los dedos; ojos y boca, con las razones EAR (Eye Aspect Ratio) y MAR (Mouth Aspect Ratio). Versión web del proyecto original en Python + OpenCV.</p>
+    </div>
+  </aside>
+</main>
+<footer>Esvin Samuel CM · <a href="https://github.com/samuelmonterroso47-af/gesture-vision-ai-" target="_blank" rel="noopener">código original en GitHub</a> · <a href="/">volver al portafolio</a></footer>
+
+<script type="module">
+import { FilesetResolver, HandLandmarker, FaceLandmarker, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs";
+
+const $ = (id) => document.getElementById(id);
+const video = $("video"), canvas = $("canvas"), ctx = canvas.getContext("2d");
+const src = document.createElement("canvas"), sctx = src.getContext("2d"); // cuadro espejado, como en la versión Python
+let hands, face, draw, running = false, mode = "track", lastT = performance.now(), fps = 0;
+
+// ---------- Clasificación (misma lógica que gestures.py) ----------
+const LEFT_EYE = [33, 160, 158, 133, 153, 144], RIGHT_EYE = [362, 385, 387, 263, 373, 380], MOUTH = [61, 291, 39, 181, 0, 17];
+const EAR_T = 0.21, MAR_T = 0.55;
+const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+function fingersUp(lm, label) {
+  const thumb = label === "Right" ? lm[4].x < lm[3].x : lm[4].x > lm[3].x;
+  return [thumb, ...[[8, 6], [12, 10], [16, 14], [20, 18]].map(([t, p]) => lm[t].y < lm[p].y)];
+}
+function handGesture(lm, label) {
+  const [th, ix, md, rg, pk] = fingersUp(lm, label), n = [th, ix, md, rg, pk].filter(Boolean).length;
+  if (n === 5) return "Mano abierta";
+  if (n === 0) return "Puño cerrado";
+  if (th && !ix && !md && !rg && !pk) return "Pulgar arriba";
+  if (ix && md && !rg && !pk) return "Señal de paz";
+  if (ix && !md && !rg && !pk && !th) return "Señalando";
+  if (th && pk && !ix && !md && !rg) return "Llamada 🤙";
+  return "Gesto no reconocido";
+}
+const ear = (lm, idx) => { const p = idx.map((i) => lm[i]), h = dist(p[0], p[3]); return h ? (dist(p[1], p[5]) + dist(p[2], p[4])) / (2 * h) : 0; };
+const mar = (lm) => { const p = MOUTH.map((i) => lm[i]), h = dist(p[0], p[1]); return h ? (dist(p[2], p[3]) + dist(p[4], p[5])) / (2 * h) : 0; };
+
+// ---------- Juego: Catch the Shape (misma lógica que game.py) ----------
+const GAME_SECONDS = 60, PINCH = 0.05, KINDS = ["círculo", "cuadrado", "triángulo"], COLORS = { "círculo": "#2997ff", "cuadrado": "#f2a83b", "triángulo": "#34c759" };
+let game = null;
+function newGame() { game = { score: 0, shape: null, t0: performance.now(), over: false }; }
+function spawn(w, h) {
+  const r = Math.max(35, 60 - game.score * 2) * (w / 1280), m = r + 20;
+  game.shape = { kind: KINDS[Math.floor(Math.random() * 3)], r, x: m + Math.random() * Math.max(1, w - 2 * m), y: m + 80 + Math.random() * Math.max(1, h - 2 * m - 80) };
+}
+function drawShape(s) {
+  ctx.fillStyle = COLORS[s.kind]; ctx.beginPath();
+  if (s.kind === "círculo") ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+  else if (s.kind === "cuadrado") ctx.rect(s.x - s.r, s.y - s.r, 2 * s.r, 2 * s.r);
+  else { ctx.moveTo(s.x, s.y - s.r); ctx.lineTo(s.x - s.r, s.y + s.r); ctx.lineTo(s.x + s.r, s.y + s.r); ctx.closePath(); }
+  ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+}
+
+// ---------- Bucle principal ----------
+function loop() {
+  if (!running) return;
+  if (video.readyState >= 2) {
+    const w = video.videoWidth, h = video.videoHeight;
+    if (canvas.width !== w) { canvas.width = src.width = w; canvas.height = src.height = h; }
+    sctx.save(); sctx.translate(w, 0); sctx.scale(-1, 1); sctx.drawImage(video, 0, 0, w, h); sctx.restore();
+    ctx.drawImage(src, 0, 0);
+    const now = performance.now();
+    const hr = hands.detectForVideo(src, now);
+    const fr = mode === "track" ? face.detectForVideo(src, now) : null;
+    fps = fps * 0.9 + (1000 / Math.max(1, now - lastT)) * 0.1; lastT = now;
+
+    hr.landmarks.forEach((lm) => {
+      draw.drawConnectors(lm, HandLandmarker.HAND_CONNECTIONS, { color: "rgba(41,151,255,.9)", lineWidth: 3 });
+      draw.drawLandmarks(lm, { color: "#e6edf7", fillColor: "#2997ff", radius: 3, lineWidth: 1 });
+    });
+
+    if (mode === "track") {
+      const g = hr.landmarks.map((lm, i) => handGesture(lm, hr.handedness[i]?.[0]?.categoryName));
+      $("g-h1").textContent = g[0] || "—"; $("g-h2").textContent = g[1] || "—";
+      if (fr && fr.faceLandmarks[0]) {
+        const lm = fr.faceLandmarks[0];
+        draw.drawConnectors(lm, FaceLandmarker.FACE_LANDMARKS_TESSELATION, { color: "rgba(255,255,255,.08)", lineWidth: 1 });
+        draw.drawConnectors(lm, FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, { color: "#f2a83b", lineWidth: 2 });
+        draw.drawConnectors(lm, FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE, { color: "#f2a83b", lineWidth: 2 });
+        draw.drawConnectors(lm, FaceLandmarker.FACE_LANDMARKS_LIPS, { color: "#34c759", lineWidth: 2 });
+        const l = ear(lm, LEFT_EYE), r = ear(lm, RIGHT_EYE), m = mar(lm);
+        // Mismo criterio que gestures.py (cuadro espejado, índices LEFT_EYE = ojo izquierdo).
+        $("g-eyes").textContent = l < EAR_T && r < EAR_T ? "Ojos cerrados" : l < EAR_T ? "Guiño (ojo izquierdo)" : r < EAR_T ? "Guiño (ojo derecho)" : "Ojos abiertos";
+        $("g-mouth").textContent = m > MAR_T ? "Boca abierta" : "Boca cerrada";
+        $("g-ratios").textContent = `${((l + r) / 2).toFixed(2)} · ${m.toFixed(2)}`;
+      } else { $("g-eyes").textContent = $("g-mouth").textContent = "Sin rostro"; $("g-ratios").textContent = "—"; }
+      $("hud").innerHTML = `<span>${Math.round(fps)} FPS</span><span>${hr.landmarks.length} mano(s)</span>`;
+    } else {
+      const left = Math.max(0, GAME_SECONDS - (now - game.t0) / 1000);
+      if (left <= 0) game.over = true;
+      if (!game.over && !game.shape) spawn(w, h);
+      if (!game.over) drawShape(game.shape);
+      const lm = hr.landmarks[0];
+      if (lm) {
+        const cx = lm[8].x * w, cy = lm[8].y * h, pinch = dist(lm[4], lm[8]) < PINCH;
+        ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+        if (pinch) { ctx.fillStyle = "#34c759"; ctx.fill(); } else { ctx.strokeStyle = "#fff"; ctx.lineWidth = 3; ctx.stroke(); }
+        if (!game.over && pinch && Math.hypot(cx - game.shape.x, cy - game.shape.y) <= game.shape.r) { game.score++; game.shape = null; }
+      }
+      $("hud").innerHTML = `<span>Puntos: ${game.score}</span><span>Tiempo: ${Math.ceil(left)} s</span><span>${Math.round(fps)} FPS</span>`;
+      const c = $("center");
+      if (game.over) { c.classList.remove("hide"); c.innerHTML = `<div class="big">Fin del juego · ${game.score} puntos</div><button class="btn primary" id="again">Jugar otra vez</button>`; $("again").onclick = () => { newGame(); c.classList.add("hide"); }; }
+    }
+  }
+  requestAnimationFrame(loop);
+}
+
+async function start() {
+  const btn = $("start"), st = $("status");
+  btn.disabled = true; btn.textContent = "Cargando modelos…";
+  try {
+    const fileset = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+    const base = { delegate: "GPU" };
+    hands = await HandLandmarker.createFromOptions(fileset, { baseOptions: { ...base, modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task" }, runningMode: "VIDEO", numHands: 2, minHandDetectionConfidence: 0.6, minTrackingConfidence: 0.6 });
+    face = await FaceLandmarker.createFromOptions(fileset, { baseOptions: { ...base, modelAssetPath: "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task" }, runningMode: "VIDEO", numFaces: 1 });
+    btn.textContent = "Esperando permiso de cámara…";
+    video.srcObject = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" }, audio: false });
+    await video.play();
+    draw = new DrawingUtils(ctx);
+    $("overlay").classList.add("hide");
+    running = true; requestAnimationFrame(loop);
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "Reintentar";
+    st.textContent = e && e.name === "NotAllowedError" ? "No diste permiso para usar la cámara. Actívalo en el candado de la barra de direcciones y reintenta."
+      : e && e.name === "NotFoundError" ? "No se encontró ninguna cámara en este dispositivo."
+      : "No se pudo iniciar: " + (e && e.message ? e.message : e) + ". Prueba en Chrome o Edge actualizados.";
+  }
+}
+
+function setMode(m) {
+  mode = m;
+  $("mode-track").classList.toggle("on", m === "track"); $("mode-game").classList.toggle("on", m === "game");
+  $("panel-track").style.display = m === "track" ? "" : "none";
+  $("center").classList.add("hide");
+  if (m === "game") {
+    newGame();
+    $("help-title").textContent = "Catch the Shape";
+    $("help").innerHTML = "<li>Aparecen figuras en pantalla</li><li>Junta pulgar e índice sobre la figura para atraparla</li><li>60 segundos; las figuras se achican al subir el puntaje</li>";
+  } else {
+    $("help-title").textContent = "Prueba estos gestos";
+    $("help").innerHTML = "<li>Mano abierta, puño, pulgar arriba</li><li>Señal de paz, señalando, llamada 🤙</li><li>Guiño con un ojo o cierra los dos</li><li>Abre la boca</li>";
+  }
+}
+$("start").onclick = start;
+$("mode-track").onclick = () => setMode("track");
+$("mode-game").onclick = () => setMode("game");
+</script>
+</body>
+</html>
