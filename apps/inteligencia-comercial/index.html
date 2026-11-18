@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inteligencia Comercial 2WH · 3WH</title>
+<meta name="description" content="Evaluación de mercado de motos y mototaxis por municipio, seguimiento de clientes, recuperación de marcas y códigos, y oportunidades de promoción.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="brand-title">Inteligencia Comercial <span>2WH · 3WH</span></div>
+    <div class="brand-sub">Mercado, clientes y oportunidades por municipio · Guatemala</div>
+  </div>
+  <div class="tag">Demo · flota real INE, ventas ficticias</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-mod="m1">Mercado 3WH</button>
+  <button class="tab" data-mod="m2">Mercado 2WH</button>
+  <button class="tab" data-mod="m3">Clientes</button>
+  <button class="tab" data-mod="m4">Recuperación de marcas</button>
+  <button class="tab" data-mod="m5">Recuperación de códigos</button>
+  <button class="tab" data-mod="m6">Oportunidades de promoción</button>
+</nav>
+
+<main>
+  <!-- 1. Mercado 3WH -->
+  <section id="m1" class="mod active">
+    <h1>Evaluación de mercado · mototaxis (3WH)</h1>
+    <p class="lead">Participación = venta del mes ÷ (flota de mototaxis × gasto mensual por unidad). La flota es el registro público del parque vehicular.</p>
+    <div class="filters">
+      <label>Departamento<select id="m1-depto"></select></label>
+      <label>Participación baja bajo (%)<input id="m1-umbral" type="number" value="10" min="0" max="100"></label>
+      <label>Gasto mensual por mototaxi (Q)<input id="m1-gasto" type="number" value="150" min="1"></label>
+      <label>Buscar municipio<input id="m1-buscar" type="search" placeholder="Ej. Coatepeque"></label>
+    </div>
+    <div class="kpis" id="m1-kpis"></div>
+    <div class="table-head"><span id="m1-count"></span><button class="btn" data-csv="m1">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m1-tabla"></table></div>
+  </section>
+
+  <!-- 2. Mercado 2WH -->
+  <section id="m2" class="mod">
+    <h1>Evaluación de mercado · motos (2WH)</h1>
+    <p class="lead">Compara la venta del mes contra el promedio del municipio y señala dónde el mercado está por debajo de lo normal.</p>
+    <div class="filters">
+      <label>Departamento<select id="m2-depto"></select></label>
+      <label>Estado<select id="m2-estado"><option>Todos</option><option>Promover / crecer</option><option>Bajo promedio</option><option>Normal</option><option>Sobre promedio</option></select></label>
+      <label>Buscar municipio<input id="m2-buscar" type="search" placeholder="Ej. Mixco"></label>
+    </div>
+    <div class="kpis" id="m2-kpis"></div>
+    <div class="table-head"><span id="m2-count"></span><button class="btn" data-csv="m2">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m2-tabla"></table></div>
+  </section>
+
+  <!-- 3. Clientes -->
+  <section id="m3" class="mod">
+    <h1>Promedios y tendencia de clientes</h1>
+    <p class="lead">Mes actual contra el promedio de 3 y 6 meses. Haz clic en una tarjeta para filtrar.</p>
+    <div class="kpis clickable" id="m3-kpis"></div>
+    <div class="filters">
+      <label>Segmento<select id="m3-seg"><option>Todos</option><option>Sin compra</option><option>Nuevo</option><option>En riesgo</option><option>Top</option><option>Estable</option></select></label>
+      <label>Departamento<select id="m3-depto"></select></label>
+    </div>
+    <div class="table-head"><span id="m3-count"></span><button class="btn" data-csv="m3">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m3-tabla"></table></div>
+  </section>
+
+  <!-- 4. Recuperación de marcas -->
+  <section id="m4" class="mod">
+    <h1>Recuperación de marcas</h1>
+    <p class="lead">Días desde la última compra de cada marca por cliente. Se marca en alerta o crítico según los umbrales que elijas.</p>
+    <div class="filters">
+      <label>Cliente<select id="m4-cliente"></select></label>
+      <label>Marca<select id="m4-marca"></select></label>
+      <label>Estado<select id="m4-estado"><option>Todos</option><option>Crítico</option><option>Alerta</option><option>Normal</option></select></label>
+      <label>Alerta desde (días)<input id="m4-alerta" type="number" value="60" min="1"></label>
+      <label>Crítico desde (días)<input id="m4-critico" type="number" value="120" min="1"></label>
+    </div>
+    <div class="kpis" id="m4-kpis"></div>
+    <div class="table-head"><span id="m4-count"></span><button class="btn" data-csv="m4">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m4-tabla"></table></div>
+  </section>
+
+  <!-- 5. Recuperación de códigos -->
+  <section id="m5" class="mod">
+    <h1>Recuperación de códigos</h1>
+    <p class="lead">Asocia códigos equivalentes o sustitutos: si el cliente compró cualquiera de ellos, el código cuenta como recuperado.</p>
+    <form class="filters assoc" id="m5-form">
+      <label>Código principal<select id="m5-principal"></select></label>
+      <label>Código relacionado<select id="m5-relacionado"></select></label>
+      <button class="btn primary" type="submit">Asociar</button>
+      <button class="btn" type="button" id="m5-reset">Restablecer asociaciones</button>
+    </form>
+    <div class="filters">
+      <label>Cliente<select id="m5-cliente"></select></label>
+      <label>Código<select id="m5-codigo"></select></label>
+      <label>Estado<select id="m5-estado"><option>Todos</option><option>Pendiente</option><option>Recuperado</option><option>Activo</option></select></label>
+    </div>
+    <div class="table-head"><span id="m5-count"></span><button class="btn" data-csv="m5">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m5-tabla"></table></div>
+  </section>
+
+  <!-- 6. Oportunidades -->
+  <section id="m6" class="mod">
+    <h1>Oportunidades de promoción</h1>
+    <p class="lead">Marcas que cada cliente nunca ha comprado, con la acción recomendada según su perfil.</p>
+    <div class="filters">
+      <label>Cliente<select id="m6-cliente"></select></label>
+      <label>Marca<select id="m6-marca"></select></label>
+      <label>Acción<select id="m6-accion"><option>Todas</option></select></label>
+    </div>
+    <div class="kpis" id="m6-kpis"></div>
+    <div class="table-head"><span id="m6-count"></span><button class="btn" data-csv="m6">Exportar CSV</button></div>
+    <div class="table-wrap"><table id="m6-tabla"></table></div>
+  </section>
+</main>
+
+<footer id="nota"></footer>
+<script src="assets/js/app.js" type="module"></script>
+</body>
+</html>
