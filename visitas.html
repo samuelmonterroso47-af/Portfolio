@@ -28,7 +28,7 @@
   .bars { display:flex; align-items:flex-end; gap:3px; height:120px; }
   .bars div { flex:1; background:var(--blue); border-radius:3px 3px 0 0; min-height:2px; position:relative; }
   .bars div:hover::after { content:attr(data-t); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:#000; padding:3px 6px; border-radius:6px; font-size:11px; white-space:nowrap; }
-  table { width:100%; border-collapse:collapse; font-size:13px; min-width:720px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; min-width:900px; }
   th { text-align:left; color:var(--muted); font-weight:600; padding:8px; border-bottom:1px solid var(--line); }
   td { padding:8px; border-bottom:1px solid #161c2c; }
   .wrap { overflow-x:auto; }
@@ -57,6 +57,11 @@
       <div class="card"><h2>Dispositivos</h2><div id="dispositivos"></div></div>
       <div class="card"><h2>Páginas</h2><div id="paginas"></div></div>
     </div>
+    <div class="grid">
+      <div class="card"><h2>Dónde pasan más tiempo (secciones)</h2><div id="secciones"></div></div>
+      <div class="card"><h2>En qué hacen clic</h2><div id="clics"></div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px"><h2>Visitantes (cuántas veces volvió cada uno)</h2><div class="wrap"><table id="visitantes"></table></div></div>
     <div class="card"><h2>Últimas visitas</h2><div class="wrap"><table id="recientes"></table></div></div>
     <div class="card" style="margin-top:12px">
       <h2>¿Cómo saber qué prospecto entró?</h2>
@@ -69,6 +74,8 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   try { localStorage.setItem("escm-admin", "1"); } catch (e) {} // excluye tus visitas en este navegador
+  function topSec(o) { var b = "—", m = 0; Object.keys(o || {}).forEach(function (k) { if (o[k] > m) { m = o[k]; b = k; } }); return b; }
+  function fmtT(s) { s = s || 0; return s >= 60 ? Math.floor(s / 60) + " min " + (s % 60) + " s" : s + " s"; }
   function list(id, items) {
     $(id).innerHTML = items.length ? items.map(function (x) { return '<div class="li"><span>' + esc(x.name) + '</span><b>' + x.n + '</b></div>'; }).join("") : '<div class="tip">Sin datos todavía.</div>';
   }
@@ -82,18 +89,25 @@
       if (!res.ok) { $("msg").textContent = res.j.error || "Error"; if (res.j.error === "No autorizado") sessionStorage.removeItem("escm-secret"); return; }
       var d = res.j;
       $("msg").textContent = ""; $("login").style.display = "none"; $("panel").style.display = "block";
-      $("kpis").innerHTML = [["Total", d.total], ["Hoy", d.hoy], ["7 días", d.dias7], ["30 días", d.dias30], ["Visitantes únicos (30 d)", d.unicos30]]
+      $("kpis").innerHTML = [["Visitas totales", d.total], ["Hoy", d.hoy], ["7 días", d.dias7], ["30 días", d.dias30], ["Personas distintas (30 d)", d.unicos30], ["Volvieron más de una vez", d.recurrentes], ["Tiempo promedio", fmtT(d.tiempoProm)], ["Bajaron en promedio", d.scrollProm + " %"]]
         .map(function (k) { return '<div class="kpi"><div class="v">' + k[1] + '</div><div class="l">' + k[0] + '</div></div>'; }).join("");
       var days = [], max = 1;
       for (var i = 29; i >= 0; i--) { var dt = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10); var n = d.porDia[dt] || 0; days.push([dt, n]); if (n > max) max = n; }
       $("bars").innerHTML = days.map(function (x) { return '<div style="height:' + (x[1] / max * 100) + '%" data-t="' + x[0] + ': ' + x[1] + '"></div>'; }).join("");
       list("origen", d.origen); list("ciudades", d.ciudades); list("dispositivos", d.dispositivos); list("paginas", d.paginas);
-      $("recientes").innerHTML = "<tr><th>Fecha</th><th>Lugar</th><th>Origen</th><th>Página</th><th>Dispositivo</th><th>Visitante</th></tr>" +
+      $("secciones").innerHTML = d.secciones.length ? d.secciones.map(function (x) { return '<div class="li"><span>' + esc(x.name) + '</span><b>' + fmtT(x.total) + ' <span style="color:var(--muted);font-weight:400">· prom. ' + fmtT(x.prom) + '</span></b></div>'; }).join("") : '<div class="tip">Sin datos todavía.</div>';
+      list("clics", d.clics);
+      $("visitantes").innerHTML = "<tr><th>Visitante</th><th>Visitas</th><th>Tiempo total</th><th>Última visita</th><th>Lugar</th><th>Etiqueta</th><th>Dispositivo</th></tr>" +
+        (d.visitantes.length ? d.visitantes.map(function (v) {
+          return "<tr><td>" + esc(v.id) + "</td><td>" + v.visitas + "</td><td>" + fmtT(v.tiempo) + "</td><td>" + esc(new Date(v.ultima).toLocaleString("es-GT")) + "</td><td>" + esc(v.lugar || "—") + "</td><td>" + esc(v.ref || "—") + "</td><td>" + esc(v.device) + "</td></tr>";
+        }).join("") : '<tr><td colspan="7" class="tip">Todavía no hay visitantes.</td></tr>');
+      $("recientes").innerHTML = "<tr><th>Fecha</th><th>Lugar</th><th>Origen</th><th>Página</th><th>Tiempo</th><th>Bajó</th><th>Sección favorita</th><th>Clics</th><th>Dispositivo</th><th>Visitante</th></tr>" +
         (d.recientes.length ? d.recientes.map(function (r) {
           return "<tr><td>" + esc(new Date(r.created_at).toLocaleString("es-GT")) + "</td><td>" + esc([r.city, r.region, r.country].filter(Boolean).join(", ") || "—") +
-            "</td><td>" + esc(r.ref_tag ? "ref: " + r.ref_tag : r.referrer_host || "Directo") + "</td><td>" + esc(r.path) + "</td><td>" + esc([r.device, r.browser, r.os].filter(Boolean).join(" · ")) +
+            "</td><td>" + esc(r.ref_tag ? "ref: " + r.ref_tag : r.referrer_host || "Directo") + "</td><td>" + esc(r.path) + "</td><td>" + fmtT(r.duration_s) + "</td><td>" + (r.max_scroll || 0) + " %</td><td>" + esc(topSec(r.sections)) +
+            "</td><td title=\"" + esc((r.clicks || []).map(function (c) { return c.l; }).join(" | ")) + "\">" + (r.clicks || []).length + "</td><td>" + esc([r.device, r.browser, r.os].filter(Boolean).join(" · ")) +
             "</td><td>" + esc((r.visitor_id || "").slice(0, 8)) + "</td></tr>";
-        }).join("") : '<tr><td colspan="6" class="tip">Todavía no hay visitas registradas.</td></tr>');
+        }).join("") : '<tr><td colspan="10" class="tip">Todavía no hay visitas registradas.</td></tr>');
     }).catch(function () { $("msg").textContent = "No se pudo conectar."; });
   }
   $("enter").onclick = function () { var s = $("secret").value.trim(); if (!s) return; sessionStorage.setItem("escm-secret", s); load(); };

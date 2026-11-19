@@ -46,7 +46,19 @@ module.exports = async (req, res) => {
     }
   } catch (e) {}
 
+  const sections = {};
+  if (body.sections && typeof body.sections === "object") {
+    Object.keys(body.sections).slice(0, 30).forEach((k) => {
+      const v = Math.round(Number(body.sections[k]));
+      if (v > 0) sections[clip(k, 60)] = Math.min(v, 86400);
+    });
+  }
+  const clicks = Array.isArray(body.clicks) ? body.clicks.slice(0, 60).map((c) => ({
+    l: clip(c && c.l, 60) || "", h: clip(c && c.h, 120) || "", t: Math.min(86400, Math.max(0, Math.round(Number(c && c.t) || 0)))
+  })) : [];
+
   const row = {
+    session_id: clip(body.sessionId, 40),
     visitor_id: clip(body.visitorId, 40),
     path: clip(body.path, 200) || "/",
     ref_tag: clip(body.ref, 80),
@@ -54,11 +66,21 @@ module.exports = async (req, res) => {
     country: clip(header(req, "x-vercel-ip-country"), 8),
     region: clip(header(req, "x-vercel-ip-country-region"), 40),
     city: clip(header(req, "x-vercel-ip-city"), 80),
+    duration_s: Math.min(86400, Math.max(0, Math.round(Number(body.duration) || 0))),
+    max_scroll: Math.min(100, Math.max(0, Math.round(Number(body.maxScroll) || 0))),
+    sections,
+    clicks,
+    updated_at: new Date().toISOString(),
     ...parseUA(ua)
   };
+  if (!row.session_id) {
+    res.status(204).end();
+    return;
+  }
 
   try {
-    const { error } = await getSupabase().from("visits").insert(row);
+    // Una fila por visita: la primera llamada la crea y las siguientes la actualizan.
+    const { error } = await getSupabase().from("visits").upsert(row, { onConflict: "session_id" });
     if (error) throw error;
     res.status(204).end();
   } catch (err) {

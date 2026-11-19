@@ -40,12 +40,15 @@ alter table dashboard_images enable row level security;
 -- que usa la service role key del lado del servidor.
 
 -- ---------------------------------------------------------------------------
--- Visitas (contador privado). Ejecutar este bloque en el SQL Editor de Supabase.
--- No se guarda la IP: solo país/ciudad aproximados que entrega Vercel, el tipo
--- de dispositivo, de dónde vino la visita y una etiqueta ?ref= opcional.
+-- Visitas (analítica privada). Ejecutar este bloque en el SQL Editor de Supabase.
+-- Una fila por visita (sesión). No se guarda la IP: solo país/ciudad aproximados
+-- que entrega Vercel, el dispositivo, el origen, la etiqueta ?ref= opcional, el
+-- tiempo en la página, el tiempo por sección, los clics y hasta dónde bajó.
 create table if not exists visits (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  session_id text unique,
   visitor_id text,
   path text,
   ref_tag text,
@@ -55,7 +58,12 @@ create table if not exists visits (
   city text,
   device text,
   browser text,
-  os text
+  os text,
+  duration_s integer default 0,
+  max_scroll integer default 0,
+  sections jsonb default '{}'::jsonb,
+  clicks jsonb default '[]'::jsonb
 );
 create index if not exists visits_created_at_idx on visits (created_at desc);
+create index if not exists visits_visitor_idx on visits (visitor_id);
 alter table visits enable row level security;
