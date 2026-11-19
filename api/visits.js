@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     res.status(503).json({ error: "ADMIN_SECRET no configurado en el servidor." });
     return;
   }
-  if (req.headers["x-admin-secret"] !== adminSecret) {
+  if (String(req.headers["x-admin-secret"] || "").trim() !== adminSecret.trim()) {
     res.status(401).json({ error: "No autorizado" });
     return;
   }
