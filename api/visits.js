@@ -21,10 +21,16 @@ module.exports = async (req, res) => {
     res.status(503).json({ error: "ADMIN_SECRET no configurado en el servidor." });
     return;
   }
-  if (String(req.headers["x-admin-secret"] || "").trim() !== adminSecret.trim()) {
-    // DIAGNÓSTICO TEMPORAL: longitud y huella corta de la clave del servidor (no revela la clave).
-    const huella = require("crypto").createHash("sha256").update(adminSecret.trim()).digest("hex").slice(0, 4);
-    res.status(401).json({ error: "No autorizado", diag: { largo: adminSecret.trim().length, huella } });
+  // El panel envía el SHA-256 de la clave (x-admin-hash): no se altera con tildes, ñ o símbolos
+  // y la clave nunca viaja en texto plano. Se mantiene x-admin-secret por compatibilidad.
+  const crypto = require("crypto");
+  const esperado = crypto.createHash("sha256").update(adminSecret.trim(), "utf8").digest("hex");
+  const hash = String(req.headers["x-admin-hash"] || "").trim().toLowerCase();
+  const plano = String(req.headers["x-admin-secret"] || "").trim();
+  const ok = (hash && hash.length === esperado.length && crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(esperado))) ||
+    (plano && plano === adminSecret.trim());
+  if (!ok) {
+    res.status(401).json({ error: "No autorizado" });
     return;
   }
 

@@ -76,6 +76,11 @@
   try { localStorage.setItem("escm-admin", "1"); } catch (e) {} // excluye tus visitas en este navegador
   function topSec(o) { var b = "—", m = 0; Object.keys(o || {}).forEach(function (k) { if (o[k] > m) { m = o[k]; b = k; } }); return b; }
   function fmtT(s) { s = s || 0; return s >= 60 ? Math.floor(s / 60) + " min " + (s % 60) + " s" : s + " s"; }
+  function sha256(t) {
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(t).trim())).then(function (buf) {
+      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+    });
+  }
   function list(id, items) {
     $(id).innerHTML = items.length ? items.map(function (x) { return '<div class="li"><span>' + esc(x.name) + '</span><b>' + x.n + '</b></div>'; }).join("") : '<div class="tip">Sin datos todavía.</div>';
   }
@@ -83,20 +88,12 @@
     var secret = sessionStorage.getItem("escm-secret");
     if (!secret) return;
     $("msg").textContent = "Cargando…";
-    fetch("/api/visits", { headers: { "x-admin-secret": secret } }).then(function (r) {
+    sha256(secret).then(function (h) { return fetch("/api/visits", { headers: { "x-admin-hash": h } }); }).then(function (r) {
       return r.json().then(function (j) { return { ok: r.ok, j: j }; });
     }).then(function (res) {
       if (!res.ok) {
         $("msg").textContent = res.j.error || "Error";
-        if (res.j.error === "No autorizado") {
-          sessionStorage.removeItem("escm-secret");
-          if (res.j.diag && crypto.subtle) {
-            crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret.trim())).then(function (buf) {
-              var h = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("").slice(0, 4);
-              $("msg").textContent = "No autorizado. Tu clave: " + secret.trim().length + " caracteres, huella " + h + " · Servidor: " + res.j.diag.largo + " caracteres, huella " + res.j.diag.huella;
-            });
-          }
-        }
+        if (res.j.error === "No autorizado") sessionStorage.removeItem("escm-secret");
         return;
       }
       var d = res.j;
