@@ -38,3 +38,24 @@ alter table dashboard_images enable row level security;
 --   público: sí (para que las capturas se vean en el portafolio sin autenticación)
 -- La escritura queda protegida por ADMIN_SECRET en /api/dashboard (POST),
 -- que usa la service role key del lado del servidor.
+
+-- ---------------------------------------------------------------------------
+-- Visitas (contador privado). Ejecutar este bloque en el SQL Editor de Supabase.
+-- No se guarda la IP: solo país/ciudad aproximados que entrega Vercel, el tipo
+-- de dispositivo, de dónde vino la visita y una etiqueta ?ref= opcional.
+create table if not exists visits (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  visitor_id text,
+  path text,
+  ref_tag text,
+  referrer_host text,
+  country text,
+  region text,
+  city text,
+  device text,
+  browser text,
+  os text
+);
+create index if not exists visits_created_at_idx on visits (created_at desc);
+alter table visits enable row level security;

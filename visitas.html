@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Visitas · privado</title>
+<style>
+  :root { --bg:#060709; --panel:#101420; --line:#1f2a44; --text:#f5f5f7; --muted:#a1a1a6; --blue:#2997ff; --amber:#f2a83b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,"Segoe UI",Manrope,sans-serif; padding:24px clamp(16px,4vw,40px) 40px; }
+  h1 { font-size:26px; font-weight:800; letter-spacing:-.02em; }
+  .sub { color:var(--muted); font-size:14px; margin:4px 0 20px; }
+  .login { display:flex; gap:10px; flex-wrap:wrap; max-width:520px; }
+  input { flex:1; min-width:200px; background:var(--panel); border:1px solid var(--line); color:var(--text); font:inherit; padding:11px 14px; border-radius:10px; }
+  button { background:var(--blue); border:0; color:#fff; font:inherit; font-weight:700; padding:11px 18px; border-radius:10px; cursor:pointer; }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--muted); }
+  .msg { color:var(--amber); font-size:14px; margin-top:10px; min-height:20px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:22px 0; }
+  .kpi { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .kpi .v { font-size:30px; font-weight:800; }
+  .kpi .l { color:var(--muted); font-size:12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:12px; margin-bottom:12px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .card h2 { font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .li { display:flex; justify-content:space-between; gap:10px; font-size:14px; padding:6px 0; border-top:1px solid var(--line); }
+  .li:first-of-type { border-top:0; }
+  .bars { display:flex; align-items:flex-end; gap:3px; height:120px; }
+  .bars div { flex:1; background:var(--blue); border-radius:3px 3px 0 0; min-height:2px; position:relative; }
+  .bars div:hover::after { content:attr(data-t); position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:#000; padding:3px 6px; border-radius:6px; font-size:11px; white-space:nowrap; }
+  table { width:100%; border-collapse:collapse; font-size:13px; min-width:720px; }
+  th { text-align:left; color:var(--muted); font-weight:600; padding:8px; border-bottom:1px solid var(--line); }
+  td { padding:8px; border-bottom:1px solid #161c2c; }
+  .wrap { overflow-x:auto; }
+  .tip { color:var(--muted); font-size:13px; line-height:1.6; }
+  code { background:#1c2740; padding:2px 6px; border-radius:6px; color:var(--text); }
+  #panel { display:none; }
+</style>
+</head>
+<body>
+  <h1>Visitas al portafolio</h1>
+  <p class="sub">Página privada: no está enlazada en el sitio, no aparece en buscadores y los datos solo se entregan con tu clave.</p>
+
+  <div class="login" id="login">
+    <input type="password" id="secret" placeholder="ADMIN_SECRET" autocomplete="current-password">
+    <button id="enter">Ver visitas</button>
+  </div>
+  <div class="msg" id="msg"></div>
+
+  <div id="panel">
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" id="reload">Actualizar</button><button class="ghost" id="logout">Cerrar sesión</button></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="card" style="margin-bottom:12px"><h2>Visitas por día · últimos 30 días</h2><div class="bars" id="bars"></div></div>
+    <div class="grid">
+      <div class="card"><h2>De dónde vienen</h2><div id="origen"></div></div>
+      <div class="card"><h2>Ciudades</h2><div id="ciudades"></div></div>
+      <div class="card"><h2>Dispositivos</h2><div id="dispositivos"></div></div>
+      <div class="card"><h2>Páginas</h2><div id="paginas"></div></div>
+    </div>
+    <div class="card"><h2>Últimas visitas</h2><div class="wrap"><table id="recientes"></table></div></div>
+    <div class="card" style="margin-top:12px">
+      <h2>¿Cómo saber qué prospecto entró?</h2>
+      <p class="tip">Agrega <code>?ref=</code> al enlace que mandas a cada empresa, por ejemplo <code>escm-portafolio.vercel.app/?ref=ferreteria-lopez</code>. Cuando lo abran, la visita aparece aquí como <b>ref: ferreteria-lopez</b>. Tus propias visitas no se cuentan en este navegador.</p>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  try { localStorage.setItem("escm-admin", "1"); } catch (e) {} // excluye tus visitas en este navegador
+  function list(id, items) {
+    $(id).innerHTML = items.length ? items.map(function (x) { return '<div class="li"><span>' + esc(x.name) + '</span><b>' + x.n + '</b></div>'; }).join("") : '<div class="tip">Sin datos todavía.</div>';
+  }
+  function load() {
+    var secret = sessionStorage.getItem("escm-secret");
+    if (!secret) return;
+    $("msg").textContent = "Cargando…";
+    fetch("/api/visits", { headers: { "x-admin-secret": secret } }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok, j: j }; });
+    }).then(function (res) {
+      if (!res.ok) { $("msg").textContent = res.j.error || "Error"; if (res.j.error === "No autorizado") sessionStorage.removeItem("escm-secret"); return; }
+      var d = res.j;
+      $("msg").textContent = ""; $("login").style.display = "none"; $("panel").style.display = "block";
+      $("kpis").innerHTML = [["Total", d.total], ["Hoy", d.hoy], ["7 días", d.dias7], ["30 días", d.dias30], ["Visitantes únicos (30 d)", d.unicos30]]
+        .map(function (k) { return '<div class="kpi"><div class="v">' + k[1] + '</div><div class="l">' + k[0] + '</div></div>'; }).join("");
+      var days = [], max = 1;
+      for (var i = 29; i >= 0; i--) { var dt = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10); var n = d.porDia[dt] || 0; days.push([dt, n]); if (n > max) max = n; }
+      $("bars").innerHTML = days.map(function (x) { return '<div style="height:' + (x[1] / max * 100) + '%" data-t="' + x[0] + ': ' + x[1] + '"></div>'; }).join("");
+      list("origen", d.origen); list("ciudades", d.ciudades); list("dispositivos", d.dispositivos); list("paginas", d.paginas);
+      $("recientes").innerHTML = "<tr><th>Fecha</th><th>Lugar</th><th>Origen</th><th>Página</th><th>Dispositivo</th><th>Visitante</th></tr>" +
+        (d.recientes.length ? d.recientes.map(function (r) {
+          return "<tr><td>" + esc(new Date(r.created_at).toLocaleString("es-GT")) + "</td><td>" + esc([r.city, r.region, r.country].filter(Boolean).join(", ") || "—") +
+            "</td><td>" + esc(r.ref_tag ? "ref: " + r.ref_tag : r.referrer_host || "Directo") + "</td><td>" + esc(r.path) + "</td><td>" + esc([r.device, r.browser, r.os].filter(Boolean).join(" · ")) +
+            "</td><td>" + esc((r.visitor_id || "").slice(0, 8)) + "</td></tr>";
+        }).join("") : '<tr><td colspan="6" class="tip">Todavía no hay visitas registradas.</td></tr>');
+    }).catch(function () { $("msg").textContent = "No se pudo conectar."; });
+  }
+  $("enter").onclick = function () { var s = $("secret").value.trim(); if (!s) return; sessionStorage.setItem("escm-secret", s); load(); };
+  $("secret").onkeydown = function (e) { if (e.key === "Enter") $("enter").click(); };
+  $("reload").onclick = load;
+  $("logout").onclick = function () { sessionStorage.removeItem("escm-secret"); location.reload(); };
+  load();
+})();
+</script>
+</body>
+</html>
