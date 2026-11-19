@@ -22,7 +22,9 @@ module.exports = async (req, res) => {
     return;
   }
   if (String(req.headers["x-admin-secret"] || "").trim() !== adminSecret.trim()) {
-    res.status(401).json({ error: "No autorizado" });
+    // DIAGNÓSTICO TEMPORAL: longitud y huella corta de la clave del servidor (no revela la clave).
+    const huella = require("crypto").createHash("sha256").update(adminSecret.trim()).digest("hex").slice(0, 4);
+    res.status(401).json({ error: "No autorizado", diag: { largo: adminSecret.trim().length, huella } });
     return;
   }
 

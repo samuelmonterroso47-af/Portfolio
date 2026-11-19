@@ -86,7 +86,19 @@
     fetch("/api/visits", { headers: { "x-admin-secret": secret } }).then(function (r) {
       return r.json().then(function (j) { return { ok: r.ok, j: j }; });
     }).then(function (res) {
-      if (!res.ok) { $("msg").textContent = res.j.error || "Error"; if (res.j.error === "No autorizado") sessionStorage.removeItem("escm-secret"); return; }
+      if (!res.ok) {
+        $("msg").textContent = res.j.error || "Error";
+        if (res.j.error === "No autorizado") {
+          sessionStorage.removeItem("escm-secret");
+          if (res.j.diag && crypto.subtle) {
+            crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret.trim())).then(function (buf) {
+              var h = Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("").slice(0, 4);
+              $("msg").textContent = "No autorizado. Tu clave: " + secret.trim().length + " caracteres, huella " + h + " · Servidor: " + res.j.diag.largo + " caracteres, huella " + res.j.diag.huella;
+            });
+          }
+        }
+        return;
+      }
       var d = res.j;
       $("msg").textContent = ""; $("login").style.display = "none"; $("panel").style.display = "block";
       $("kpis").innerHTML = [["Visitas totales", d.total], ["Hoy", d.hoy], ["7 días", d.dias7], ["30 días", d.dias30], ["Personas distintas (30 d)", d.unicos30], ["Volvieron más de una vez", d.recurrentes], ["Tiempo promedio", fmtT(d.tiempoProm)], ["Bajaron en promedio", d.scrollProm + " %"]]
